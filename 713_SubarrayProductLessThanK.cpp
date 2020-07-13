@@ -5,7 +5,7 @@
 //Sliding window
 class Solution {
 public:
-    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+    int numSubarrayProductLessThanK(vector<int> &nums, int k) {
         if (k <= 1) return 0;
 
         int prod = 1;
