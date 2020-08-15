@@ -29,3 +29,21 @@ public:
         return result;
     }
 };
+
+// same
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        if (k <= 1) return 0;
+        int total = 1, l = 0, result = 0;
+        for (int r = 0; r < nums.size(); r++) {
+            total *=  nums[r];
+            while (total >= k) {
+                total /= nums[l];
+                l++;
+            }
+            result+= r - l + 1; // all substring will be
+        }
+        return result;
+    }
+};

@@ -32,3 +32,26 @@ private:
         return true;
     }
 };
+
+
+//Best
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int l1 = s1.size(), l2 = s2.size();
+        vector<char> c1(26), c2(26);
+
+        for (char c : s1) {
+            c1[c - 'a']++;
+        }
+        for (int i = 0; i < l2; i++) {
+            if (i >= l1) {
+                //shrink
+                --c2[s2[i-l1] - 'a']; //i - l1 will find left
+            }
+            ++c2[s2[i] - 'a'];
+            if (c1 == c2) return true;
+        }
+        return false;
+    }
+};
