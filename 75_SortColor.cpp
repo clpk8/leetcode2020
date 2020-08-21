@@ -2,6 +2,31 @@
 // Created by Chunbin lin on 6/11/20.
 //
 
+//brute force
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int num1 = 0, num2 = 0, num3 = 0;
+        for (int num : nums) {
+            if (num == 0) num1++;
+            else if (num == 1) num2++;
+            else num3++;
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            if (num1) {
+                nums[i] = 0;
+                num1--;
+            } else if (num2) {
+                nums[i] = 1;
+                num2--;
+            } else {
+                nums[i] = 2;
+            }
+        }
+
+    }
+};
+
 class Solution {
 public:
     void sortColors(vector<int>& nums) {

@@ -29,3 +29,29 @@ public:
         return result;
     }
 };
+
+//same
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        if (S.empty()) return {};
+        vector<int> ans;
+        vector<int> map(26, 0);
+        for (int i = 0; i < S.size(); i++) {
+            map[S[i] - 'a'] = i;
+        }
+        int left = 0, right = -1;
+        for (int i = 0; i < S.size(); i++) {
+            right = max(right, map[S[i] -'a']);
+            if (i == right) {
+                //done
+                ans.push_back(right - left + 1);
+                right = -1;
+                left = i + 1;
+                continue;
+            }
+
+        }
+        return ans;
+    }
+};
