@@ -61,3 +61,42 @@ public:
         return steps == 1 ? -1 : steps - 1;
     }
 };
+
+
+//similar BFS
+class Solution {
+public:
+    int maxDistance(vector<vector<int>>& grid) {
+        int n = grid.size(), m = grid[0].size();
+        int ans = -1;
+        queue<pair<int, int>> q;
+        for (int i = 0 ; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1) q.push({i, j});
+            }
+        }
+        vector<vector<int>> dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int steps = 0;
+        while (q.size()) {
+            int size = q.size();
+            while (size--) {
+                auto p = q.front(); q.pop();
+                int x = p.first, y = p.second;
+                if (grid[x][y] == 2)
+                    ans = max(steps, ans);
+
+                for (auto dir : dirs) {
+                    int dx = dir.front() + x;
+                    int dy = dir.back() + y;
+                    if (dx < 0 || dx >= n || dy < 0 || dy >= m || grid[dx][dy] != 0){
+                        continue;
+                    }
+                    grid[dx][dy] = 2;
+                    q.push({dx, dy});
+                }
+            }
+            steps++;
+        }
+        return ans;
+    }
+};
