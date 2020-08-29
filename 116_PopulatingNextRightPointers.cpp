@@ -1,7 +1,3 @@
-//
-// Created by Chunbin lin on 6/7/20.
-//
-
 /*
 // Definition for a Node.
 class Node {
@@ -24,10 +20,15 @@ class Solution {
 public:
     Node* connect(Node* root) {
         if (!root || !root->left) return root;
+        //connect 2 -> 3 in the example
         root->left->next = root->right;
-        if (root->next)
+        //connect 5 -> 6
+        if (root->next) {
+            // for example, 2 has next of 3
             root->right->next = root->next->left;
+        }
 
+        //connect left and right
         connect(root->left);
         connect(root->right);
         return root;

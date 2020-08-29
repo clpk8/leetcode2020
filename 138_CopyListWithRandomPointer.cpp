@@ -49,3 +49,45 @@ public:
         return res;
     }
 };
+
+//new
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        unordered_map<Node*, Node*> map; // original: copy
+        Node* ptr = head;
+
+        Node* newHead = new Node(-1);
+        Node* newHeadPtr = newHead;
+        while (ptr) {
+            newHeadPtr->next = new Node(ptr->val);
+            newHeadPtr = newHeadPtr->next;
+            map[ptr] = newHeadPtr;
+            ptr = ptr->next;
+        }
+        ptr = head, newHeadPtr = newHead->next;
+        while (ptr) {
+            newHeadPtr->random = map[ptr->random];
+            newHeadPtr = newHeadPtr->next;
+            ptr = ptr->next;
+        }
+
+        return newHead->next;
+    }
+};

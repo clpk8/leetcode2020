@@ -17,3 +17,27 @@ public:
         return res;
     }
 };
+
+//or this
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        auto comp = [&](string s1, string s2) {
+            string a = s1 + s2;
+            string b = s2 + s1;
+            return a > b;
+        };
+        vector<string> strs;
+        for (int num : nums) {
+            strs.push_back(to_string(num));
+        }
+        sort(strs.begin(), strs.end(), comp);
+
+        if (strs[0] == "0") return "0";
+        string result;
+        for (string s : strs) {
+            result += s;
+        }
+        return result;
+    }
+};
