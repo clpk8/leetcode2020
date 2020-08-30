@@ -34,3 +34,25 @@ public:
         return max_sum;
     }
 };
+
+//similar
+class Solution {
+    int ans;
+
+    // return max path going down
+    int dfs(TreeNode *root) {
+        if (!root) return 0;
+        int x = dfs(root->left);
+        int y = dfs(root->right);
+
+        //keep track of max
+        ans = max(ans, x + y + root->val);
+        return max(0, root->val + max(x, y)); //reutrn to upper level
+    }
+public:
+    int maxPathSum(TreeNode* root) {
+        ans = INT_MIN;
+        dfs(root);
+        return ans;
+    }
+};
